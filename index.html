@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>I Miss You!</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-color: #000; /* nền tối */
+    }
+
+    .popup {
+      position: absolute;
+      width: 210px;
+      height: 50px;
+      background-color: #F8C7DA;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Comic Sans MS", cursive, sans-serif;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #ff9ec9;
+      opacity: 0;
+      animation: fadeInOut 10s forwards;
+    }
+
+    @keyframes fadeInOut {
+      0% { opacity: 0; transform: scale(0.5); }
+      10% { opacity: 1; transform: scale(1); }
+      90% { opacity: 1; }
+      100% { opacity: 0; transform: scale(0.5); }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const messages = ["I Miss You !"];
+    const colors = ["white"];
+
+    function createPopup() {
+      const popup = document.createElement("div");
+      popup.classList.add("popup");
+      popup.textContent = messages[Math.floor(Math.random() * messages.length)];
+      popup.style.color = colors[Math.floor(Math.random() * colors.length)];
+
+      const x = Math.random() * (window.innerWidth - 220);
+      const y = Math.random() * (window.innerHeight - 60);
+
+      popup.style.left = `${x}px`;
+      popup.style.top = `${y}px`;
+
+      document.body.appendChild(popup);
+
+      setTimeout(() => {
+        popup.remove();
+      }, 10000); // 10s
+    }
+
+    function createMultiplePopups(num) {
+      let count = 0;
+      const interval = setInterval(() => {
+        createPopup();
+        count++;
+        if (count >= num) clearInterval(interval);
+      }, 30); // 30ms mỗi popup
+    }
+
+    // Tự động tạo 200 popup như Python
+    createMultiplePopups(200);
+  </script>
+</body>
+</html>
